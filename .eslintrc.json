@@ -1,0 +1,47 @@
+{
+  "root": true,
+  "env": {
+      "node": true,
+      "es6": true
+  },
+  "plugins": [
+      "promise",
+      "import",
+      "standard",
+      "node"
+  ],
+  "extends": [
+      "standard",
+      "plugin:node/recommended",
+      "plugin:promise/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings"
+  ],
+  "parserOptions": {
+      "ecmaVersion": 8
+  },
+  "rules": {
+      "arrow-parens": [2, "always"],
+      "consistent-return": 1,
+      "eol-last": 2,
+      "func-style": [2, "declaration", {"allowArrowFunctions": true}],
+      "node/exports-style": [2, "module.exports"],
+      "node/no-unpublished-require": ["error", {
+          "allowModules": [
+              "jest-plugins"
+          ]
+      }],
+      "node/no-extraneous-require": ["error", {
+          "allowModules": ["jest-environment-node"]
+      }],
+      "no-multiple-empty-lines": [2, {"max": 1, "maxBOF": 0, "maxEOF": 0}],
+      "no-undefined": 2,
+      "no-var": 2,
+      "prefer-arrow-callback": 2,
+      "prefer-const": 2,
+      "prefer-template": 2,
+      "promise/valid-params": 0,
+      "promise/no-nesting": 0,
+      "strict": [2, "never"]
+  }
+}

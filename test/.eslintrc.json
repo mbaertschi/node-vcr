@@ -1,0 +1,21 @@
+{
+  "plugins": [
+      "jest"
+  ],
+  "extends": [
+      "plugin:jest/recommended"
+  ],
+  "parserOptions": {
+      "ecmaVersion": 8
+  },
+  "globals": {
+    "set": true,
+    "context": true,
+    "its": true,
+    "subject": true,
+    "isExpected": true
+  },
+  "rules": {
+    "jest/no-identical-title": 0
+  }
+}
