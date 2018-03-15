@@ -1,7 +1,7 @@
 {
   "name": "node-vcr",
   "version": "1.0.0",
-  "description": "nodejs npm package boilerplate",
+  "description": "Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests",
   "main": "./lib/index.js",
   "scripts": {
     "build": "node_modules/.bin/babel src -d lib",
