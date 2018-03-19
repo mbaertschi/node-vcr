@@ -78,7 +78,6 @@
   "pre-commit": [
     "deps:prod",
     "test",
-    "lint",
-    "jsdoc"
+    "lint"
   ]
 }
