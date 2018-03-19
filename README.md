@@ -15,6 +15,9 @@ Record HTTP interactions The Node Way™. Inspired by ruby's [vcr][1] and heavil
 $ npm install node-vcr --save-dev
 ```
 
+## Code Documentation
+Please refer to the [github wiki page](https://mbaertschi.github.io/node-vcr/)
+
 ## Usage
 The main idea behind testing HTTP clients with node-vcr is:
 
