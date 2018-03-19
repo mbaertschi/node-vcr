@@ -16,6 +16,8 @@
     "isExpected": true
   },
   "rules": {
-    "jest/no-identical-title": 0
+    "jest/no-identical-title": 0,
+    "node/no-unpublished-require": 0,
+    "promise/no-callback-in-promise": 0
   }
 }

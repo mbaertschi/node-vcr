@@ -1,4 +1,4 @@
-# Boilerplate for nodejs npm package
+# Node VCR
 <!-- Dependency Status -->
 <a href="https://david-dm.org/mbaertschi/node-vcr">
   <img src="https://david-dm.org/mbaertschi/node-vcr.svg" alt="Dependency Status" />
@@ -7,6 +7,59 @@
 <a href="https://david-dm.org/mbaertschi/node-vcr?type=dev">
   <img src="https://david-dm.org/mbaertschi/node-vcr/dev-status.svg" alt="devDependency Status" />
 </a>
+
+Record HTTP interactions The Node Way™. Inspired by ruby's [vcr][1] and heavily based on [flickr/yakbak][2] and [ijpiantanida/talkback][3].
+
+## Installation
+```bash
+$ npm install node-vcr --save-dev
+```
+
+## Usage
+The main idea behind testing HTTP clients with node-vcr is:
+
+1. Make your client's target host configurable
+2. Set up a node-vcr server locally to proxy the target host
+3. Point your client at the node-vcr server.
+
+Then develop or run your tests. If a recorded HTTP request is found on disk, it will be played back instead of hitting the target host. If no recorded request is found, the request will be forwarded to the target host and recorded to disk (or return 404).
+
+```javascript
+const crypto = require('crypto')
+const http = require('http')
+const nodeVcr = require('node-vcr')
+const path = require('path')
+const _ = require('lodash')
+
+const proxyTarget = 'https://api.github.com/users/mbaertschi/orgs'
+const dirname = path.join(__dirname, 'playback')
+const port = 8888
+
+const hash = (req, body) => {
+  const action = `${req.method.toLowerCase()}_${_.last(req.url.split('/'))}`
+  const content = body.toString()
+  const md5sum = crypto.createHash('md5')
+
+  return `${action}_${md5sum.update(content).digest('hex')}`
+}
+
+const handler = nodeVcr(proxyTarget, {
+  dirname,
+  hash
+})
+
+const server = http.createServer(handler)
+server.listen(port)
+```
+
+### Options
+| Name | Type | Description | Default |
+| --- | --- | --- | --- |
+| **host** | String | The proxy target to tape | |
+| **dirname** | String | The tapes directory | `./tapes/`
+| **noRecord** | Boolean | If true, requests will return a 404 error if the tape doesn't exist | `false` |
+| **maxRedirects** | Number | Number of max http redirects. 0 means no redirects | `5` |
+| **hash** | Function | Provide your own IncomingMessage hash function of the signature `function (req, body)` | `see source` |
 
 ## Tech-Stack
 - [nodemon](https://github.com/remy/nodemon) development mode
@@ -33,3 +86,10 @@ yarn deps
 # build with babel
 yarn build
 ```
+
+## License
+MIT
+
+[1]: https://github.com/vcr/vcr
+[2]: https://github.com/flickr/yakbak
+[3]: https://github.com/ijpiantanida/talkback

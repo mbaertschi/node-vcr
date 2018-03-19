@@ -12,7 +12,8 @@
     "jsdoc": "node_modules/.bin/jsdoc -c jsdoc.config.json",
     "lint": "node_modules/.bin/eslint .",
     "prepublish": "npm run build",
-    "test": "NODE_ENV=test node_modules/.bin/jest"
+    "test": "NODE_ENV=test node_modules/.bin/jest",
+    "test:server": "DEBUG=node-vcr* nodemon test/test-proxy.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,9 @@
   "keywords": [
     "nodejs",
     "npm",
-    "boilerplate"
+    "vcr",
+    "testing",
+    "http"
   ],
   "author": "Michael Bärtschi <michael.baertschi@zebbra.ch> (http://zebbra.ch)",
   "license": "MIT",
@@ -32,7 +35,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "docdash": "^0.4.0",
-    "eslint": "^4.18.2",
+    "eslint": "^4.19.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jest": "^21.15.0",
@@ -45,21 +48,25 @@
     "jest-plugins": "^2.7.0",
     "jest-plugins-recommended": "^2.7.0",
     "jsdoc": "^3.5.5",
+    "lodash": "^4.17.5",
     "nodemon": "^1.17.2",
     "npm-check": "^5.5.2",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "supertest": "^3.0.0"
   },
   "dependencies": {
-    "debug": "^3.1.0"
+    "content-type": "^1.0.4",
+    "debug": "^3.1.0",
+    "follow-redirects": "^1.4.1",
+    "fs-extra": "^5.0.0",
+    "incoming-message-hash": "^3.2.2",
+    "pretty-data": "^0.40.0"
   },
   "jest": {
     "rootDir": ".",
     "roots": [
       "<rootDir>/test/"
     ],
-    "testEnvironment": "<rootDir>/test/sandbox.js",
-    "globalSetup": "<rootDir>/test/setup.js",
-    "globalTeardown": "<rootDir>/test/teardown.js",
     "collectCoverage": true,
     "coverageDirectory": "reports/coverage",
     "testResultsProcessor": "jest-junit",

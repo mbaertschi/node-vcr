@@ -58,9 +58,6 @@ typings/
 # dotenv environment variables file
 .env
 
-# documentation
-docs
-
 # builds
 dist
 lib

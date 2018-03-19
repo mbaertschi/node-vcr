@@ -26,13 +26,8 @@
       "eol-last": 2,
       "func-style": [2, "declaration", {"allowArrowFunctions": true}],
       "node/exports-style": [2, "module.exports"],
-      "node/no-unpublished-require": ["error", {
-          "allowModules": [
-              "jest-plugins"
-          ]
-      }],
       "node/no-extraneous-require": ["error", {
-          "allowModules": ["jest-environment-node"]
+          "allowModules": ["jest-environment-node", "os-tmpdir"]
       }],
       "no-multiple-empty-lines": [2, {"max": 1, "maxBOF": 0, "maxEOF": 0}],
       "no-undefined": 2,

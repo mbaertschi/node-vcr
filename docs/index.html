@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-node-vcr.html">node-vcr</a></li><li><a href="module-node-vcr_buffer.html">node-vcr/buffer</a></li><li><a href="module-node-vcr_curl.html">node-vcr/curl</a><ul class='methods'><li data-type='method'><a href="module-node-vcr_curl.html#.request">request</a></li><li data-type='method'><a href="module-node-vcr_curl.html#.response">response</a></li></ul></li><li><a href="module-node-vcr_media-type.html">node-vcr/media-type</a><ul class='methods'><li data-type='method'><a href="module-node-vcr_media-type.html#.isHumanReadable">isHumanReadable</a></li></ul></li><li><a href="module-node-vcr_proxy.html">node-vcr/proxy</a></li><li><a href="module-node-vcr_record.html">node-vcr/record</a></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>Node VCR</h1><!-- Dependency Status -->
+<p><a href="https://david-dm.org/mbaertschi/node-vcr">
+  <img src="https://david-dm.org/mbaertschi/node-vcr.svg" alt="Dependency Status" />
+</a>
+<!-- devDependency Status -->
+<a href="https://david-dm.org/mbaertschi/node-vcr?type=dev">
+  <img src="https://david-dm.org/mbaertschi/node-vcr/dev-status.svg" alt="devDependency Status" />
+</a></p>
+<p>Record HTTP interactions The Node Way™. Inspired by ruby's <a href="https://github.com/vcr/vcr">vcr</a> and heavily based on <a href="https://github.com/flickr/yakbak">flickr/yakbak</a> and <a href="https://github.com/ijpiantanida/talkback">ijpiantanida/talkback</a>.</p>
+<h2>Installation</h2><pre class="prettyprint source lang-bash"><code>$ npm install node-vcr --save-dev</code></pre><h2>Usage</h2><p>The main idea behind testing HTTP clients with node-vcr is:</p>
+<ol>
+<li>Make your client's target host configurable</li>
+<li>Set up a node-vcr server locally to proxy the target host</li>
+<li>Point your client at the node-vcr server.</li>
+</ol>
+<p>Then develop or run your tests. If a recorded HTTP request is found on disk, it will be played back instead of hitting the target host. If no recorded request is found, the request will be forwarded to the target host and recorded to disk (or return 404).</p>
+<pre class="prettyprint source lang-javascript"><code>const crypto = require('crypto')
+const http = require('http')
+const nodeVcr = require('node-vcr')
+const path = require('path')
+const _ = require('lodash')
+
+const proxyTarget = 'https://api.github.com/users/mbaertschi/orgs'
+const dirname = path.join(__dirname, 'playback')
+const port = 8888
+
+const hash = (req, body) => {
+  const action = `${req.method.toLowerCase()}_${_.last(req.url.split('/'))}`
+  const content = body.toString()
+  const md5sum = crypto.createHash('md5')
+
+  return `${action}_${md5sum.update(content).digest('hex')}`
+}
+
+const handler = nodeVcr(proxyTarget, {
+  dirname,
+  hash
+})
+
+const server = http.createServer(handler)
+server.listen(port)</code></pre><h3>Options</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>host</strong></td>
+<td>String</td>
+<td>The proxy target to tape</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>dirname</strong></td>
+<td>String</td>
+<td>The tapes directory</td>
+<td><code>./tapes/</code></td>
+</tr>
+<tr>
+<td><strong>noRecord</strong></td>
+<td>Boolean</td>
+<td>If true, requests will return a 404 error if the tape doesn't exist</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><strong>maxRedirects</strong></td>
+<td>Number</td>
+<td>Number of max http redirects. 0 means no redirects</td>
+<td><code>5</code></td>
+</tr>
+<tr>
+<td><strong>hash</strong></td>
+<td>Function</td>
+<td>Provide your own IncomingMessage hash function of the signature <code>function (req, body)</code></td>
+<td><code>see source</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Tech-Stack</h2><ul>
+<li><a href="https://github.com/remy/nodemon">nodemon</a> development mode</li>
+<li><a href="https://facebook.github.io/jest/">jest</a> test environment</li>
+<li><a href="http://usejsdoc.org/">jsdoc</a> documentation</li>
+<li><a href="https://www.npmjs.com/package/npm-check">npm-check</a> for dependencies check</li>
+<li><a href="https://www.npmjs.com/package/pre-commit">pre-commit</a> for pre git commit hooks</li>
+<li><a href="https://babeljs.io/">babel</a> to compile to es2015</li>
+</ul>
+<h2>Scripts</h2><pre class="prettyprint source lang-bash"><code># start development mode with nodemon
+yarn dev
+# run tests with jest
+yarn test
+# start continous integration testing with jest
+yarn ci
+# generate the jsdoc documentation
+yarn jsdoc
+# run eslint
+yarn lint
+# check for dependendies updates
+yarn deps
+# build with babel
+yarn build</code></pre><h2>License</h2><p>MIT</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Mar 19 2018 21:21:16 GMT+0100 (CET) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
