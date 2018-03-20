@@ -11,9 +11,8 @@
 <a href="https://david-dm.org/mbaertschi/node-vcr?type=dev">
   <img src="https://david-dm.org/mbaertschi/node-vcr/dev-status.svg" alt="devDependency Status" />
 </a>
-[![NPM version](https://badge.fury.io/js/badge-list.svg)](http://badge.fury.io/js/badge-list)
 
-Record HTTP interactions The Node Way™. Inspired by ruby's [vcr][1] and heavily based on [flickr/yakbak][2] and [ijpiantanida/talkback][3].
+Record HTTP interactions The Node Way™. This repository is basically a clone of [flickr/yakbak][2] and is also based on [ijpiantanida/talkback][3].
 
 ## Installation
 ```bash
