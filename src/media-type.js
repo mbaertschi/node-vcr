@@ -6,7 +6,8 @@ const humanReadableContentTypes = [
   'text/css',
   'text/html',
   'text/javascript',
-  'text/plain'
+  'text/plain',
+  'text/xml'
 ]
 
 const getHeader = (headers, headerName) => {

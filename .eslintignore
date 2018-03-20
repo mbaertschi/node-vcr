@@ -2,3 +2,4 @@ docs
 reports
 lib
 dist
+test-server.js
