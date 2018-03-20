@@ -1,4 +1,8 @@
 # Node VCR
+<!-- circleci status -->
+<a href="https://github.com/mbaertschi/node-vcr">
+  <img src="https://circleci.com/gh/mbaertschi/node-vcr.svg?style=shield&circle-token=bcaf10afef571e25d54c781f910431cb4c3cdb0c" alt="Build Status">
+</a>
 <!-- Dependency Status -->
 <a href="https://david-dm.org/mbaertschi/node-vcr">
   <img src="https://david-dm.org/mbaertschi/node-vcr.svg" alt="Dependency Status" />
@@ -7,6 +11,7 @@
 <a href="https://david-dm.org/mbaertschi/node-vcr?type=dev">
   <img src="https://david-dm.org/mbaertschi/node-vcr/dev-status.svg" alt="devDependency Status" />
 </a>
+[![NPM version](https://badge.fury.io/js/badge-list.svg)](http://badge.fury.io/js/badge-list)
 
 Record HTTP interactions The Node Way™. Inspired by ruby's [vcr][1] and heavily based on [flickr/yakbak][2] and [ijpiantanida/talkback][3].
 
