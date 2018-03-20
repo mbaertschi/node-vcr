@@ -25,7 +25,7 @@ describe('record', () => {
 
     it('returns the filename', (done) => {
       req.on('response', (res) => {
-        record(req, res, tmpdir.join('foo.js'))
+        record(req, res, tmpdir.join('foo.js'), [])
           .then((filename) => {
             expect(filename).toBe(tmpdir.join('foo.js'))
             return done()
@@ -64,7 +64,7 @@ describe('record', () => {
         makeRequest(requestHandler, (res) => {
           const expected = fixture('base64').replace('{addr}', server.addr).replace('{port}', server.port)
 
-          record(res.req, res, tmpdir.join('foo.js'))
+          record(res.req, res, tmpdir.join('foo.js'), [])
             .then((filename) => {
               const content = fse.readFileSync(filename, 'utf-8')
 
@@ -88,7 +88,31 @@ describe('record', () => {
         makeRequest(requestHandler, (res) => {
           const expected = fixture('utf8').replace('{addr}', server.addr).replace('{port}', server.port)
 
-          return record(res.req, res, tmpdir.join('foo.js'))
+          return record(res.req, res, tmpdir.join('foo.js'), [])
+            .then((filename) => {
+              const content = fse.readFileSync(filename, 'utf8')
+
+              expect(content).toEqual(expected)
+              return done()
+            })
+            .catch((error) => {
+              return done(error)
+            })
+        })
+      })
+
+      it('records the response to disk using utf-8 and filters out the ignored headers', (done) => {
+        const requestHandler = (req, res) => {
+          res.statusCode = 201
+          res.setHeader('content-type', 'text/html')
+          res.setHeader('date', 'Sat, 26 Oct 1985 08:20:00 GMT')
+          res.end('OK')
+        }
+
+        makeRequest(requestHandler, (res) => {
+          const expected = fixture('utf8ignoredHeaders').replace('{addr}', server.addr).replace('{port}', server.port)
+
+          return record(res.req, res, tmpdir.join('foo.js'), ['user-agent', 'date'])
             .then((filename) => {
               const content = fse.readFileSync(filename, 'utf8')
 
@@ -112,7 +136,7 @@ describe('record', () => {
         makeRequest(requestHandler, (res) => {
           const expected = fixture('json').replace('{addr}', server.addr).replace('{port}', server.port)
 
-          return record(res.req, res, tmpdir.join('foo.js'))
+          return record(res.req, res, tmpdir.join('foo.js'), [])
             .then((filename) => {
               const content = fse.readFileSync(filename, 'utf8')
 

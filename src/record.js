@@ -13,9 +13,10 @@ const { render } = require('./template')
  * @param { http.ClientRequest } req
  * @param { http.IncomingMessage } res
  * @param { String } filename
+ * @param { Array } ignoredHeaders
  * @returns { Promise.<String> }
  */
-const record = (req, res, filename) => {
+const record = (req, res, filename, ignoredHeaders) => {
   return buffer(res)
     .then((body) => {
       const encoding = isHumanReadable(res) ? 'utf-8' : 'base64'
@@ -35,7 +36,7 @@ const record = (req, res, filename) => {
         return stringData
       })
 
-      return render(req, res, body, encoding)
+      return render(req, res, body, encoding, ignoredHeaders)
     })
     .then((data) => {
       return fse.writeFile(filename, data)

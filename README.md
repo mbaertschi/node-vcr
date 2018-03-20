@@ -66,6 +66,7 @@ server.listen(port)
 | **dirname** | String | The tapes directory | `./tapes/`
 | **noRecord** | Boolean | If true, requests will return a 404 error if the tape doesn't exist | `false` |
 | **maxRedirects** | Number | Number of max http redirects. 0 means no redirects | `5` |
+| **ignoreHeaders** | Array | Headers which must not be written down to tape (req and res) | `[ ]` |
 | **hash** | Function | Provide your own IncomingMessage hash function of the signature `function (req, body)` | `see source` |
 
 ## Tech-Stack

@@ -1,4 +1,4 @@
-const render = (req, res, body, encoding) => {
+const render = (req, res, body, encoding, ignoredHeaders) => {
   let template =
 `const path = require('path')
 
@@ -6,11 +6,13 @@ const render = (req, res, body, encoding) => {
 
 `
 
-  Object.keys(req._headers).forEach((key) => {
-    template +=
+  Object.keys(req._headers)
+    .filter((key) => ignoredHeaders.indexOf(key) === -1)
+    .forEach((key) => {
+      template +=
 `// ${key}: ${req._headers[key]}
 `
-  })
+    })
 
   template +=
 `
@@ -18,11 +20,13 @@ module.exports = function (req, res) {
   res.statusCode = ${JSON.stringify(res.statusCode)}
 `
 
-  Object.keys(res.headers).forEach((key) => {
-    template +=
+  Object.keys(res.headers)
+    .filter((key) => ignoredHeaders.indexOf(key) === -1)
+    .forEach((key) => {
+      template +=
 `
   res.setHeader('${key}', '${res.headers[key]}')`
-  })
+    })
 
   template +=
 `
