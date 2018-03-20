@@ -59,5 +59,6 @@ typings/
 .env
 
 # builds
+package-lock.json
 dist
 lib
