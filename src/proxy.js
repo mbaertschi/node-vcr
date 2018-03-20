@@ -27,7 +27,6 @@ const proxy = (req, body, host, maxRedirects, callback) => {
   const protocol = uri.protocol.replace(':', '')
   const mod = maxRedirects ? (followRedirects[protocol] || followRedirects.http) : (modMapping[protocol] || http)
   const pReq = mod.request({
-    host: uri.host,
     hostname: uri.hostname,
     port: uri.port,
     method: req.method,
@@ -38,6 +37,8 @@ const proxy = (req, body, host, maxRedirects, callback) => {
   }, (pRes) => {
     return callback(null, pRes)
   })
+
+  pReq.setHeader('host', uri.host)
 
   debug(`req=${req.url} host=${uri.host}`)
 
