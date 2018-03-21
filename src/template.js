@@ -1,4 +1,4 @@
-const render = (req, res, body, encoding, ignoredHeaders) => {
+const render = (req, res, body, encoding, ignoredHeaders, reqBody) => {
   let template =
 `const path = require('path')
 
@@ -13,6 +13,18 @@ const render = (req, res, body, encoding, ignoredHeaders) => {
 `// ${key}: ${req._headers[key]}
 `
     })
+
+  if (reqBody) {
+    template +=
+`
+// Request Body:
+`
+    reqBody.split('\n').forEach((line) => {
+      template +=
+`// ${line}
+`
+    })
+  }
 
   template +=
 `

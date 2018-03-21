@@ -12,6 +12,7 @@ const defaultOpts = {
   dirname: './tapes/',
   noRecord: false,
   maxRedirects: 5,
+  tapeRequestBody: false,
   ignoreHeaders: [],
   hash: messageHash.sync
 }
@@ -28,6 +29,7 @@ RecordingDisabledError.status = 404
  * @param { string } options.dirname                    The tapes directory
  * @param { boolean } [options.noRecord=false]          If true, requests will return a 404 error if the tape doesn't exist
  * @param { boolean } [options.maxRedirects=5]          If set to 0 redirects will be disabled
+ * @param { boolean } [options.tapeRequestBody=false]   If true, the request body will be stored to tape
  * @param { array } [options.ignoreHeaders=[]]          A list of headers which must not be written down to tape
  * @param { function } [options.hash=messageHash.sync]  Provide your own IncomingMessage hash function of the signature `function (req, body)`
  * @returns { function } A function of the signature `function (req, res)` that you can give to an `http.Server` as its handler
@@ -53,7 +55,11 @@ module.exports = (host, usrOpts) => {
         } else {
           return proxy(req, body, host, opts.maxRedirects)
             .then((pRes) => {
-              return record(pRes.req, pRes, filename, opts.ignoreHeaders)
+              let reqBody
+              if (opts.tapeRequestBody) {
+                reqBody = body.toString()
+              }
+              return record(pRes.req, pRes, filename, opts.ignoreHeaders, reqBody)
             })
         }
       })
