@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com/mbaertschi/node-vcr"
+    "url": "git+https://github.com/mbaertschi/node-vcr.git"
   },
   "keywords": [
     "nodejs",
@@ -28,6 +28,10 @@
   ],
   "author": "Michael Bärtschi <michael.baertschi@zebbra.ch> (http://zebbra.ch)",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mbaertschi/node-vcr/issues"
+  },
+  "homepage": "https://github.com/mbaertschi/node-vcr#readme",
   "engines": {
     "node": ">=8.9.x"
   },
@@ -42,7 +46,7 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
-    "jest": "^22.4.2",
+    "jest": "^22.4.3",
     "jest-cli": "^23.0.0-alpha.0",
     "jest-junit": "^3.6.0",
     "jest-plugins": "^2.7.0",

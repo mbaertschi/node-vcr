@@ -1,6 +1,6 @@
 # Node VCR
 <!-- circleci status -->
-<a href="https://github.com/mbaertschi/node-vcr">
+<a href="https://circleci.com/gh/mbaertschi/node-vcr">
   <img src="https://circleci.com/gh/mbaertschi/node-vcr.svg?style=shield&circle-token=bcaf10afef571e25d54c781f910431cb4c3cdb0c" alt="Build Status">
 </a>
 <!-- Dependency Status -->
