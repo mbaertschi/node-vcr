@@ -15,5 +15,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 
-[Unreleased]: https://github.com/mbaertschi/npm-node-boilerplate/compare/v1.4.1...HEAD
-[1.4.1]: https://github.com/mbaertschi/npm-node-boilerplate/compare/v1.0.0...v1.4.1
+[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v1.4.1...HEAD
+[1.4.1]: https://github.com/mbaertschi/node-vcr/compare/v1.2.0...v1.4.1
