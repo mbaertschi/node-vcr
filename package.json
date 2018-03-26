@@ -1,6 +1,6 @@
 {
   "name": "node-vcr",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests",
   "main": "./lib/index.js",
   "scripts": {
