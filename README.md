@@ -70,6 +70,9 @@ server.listen(port)
 | **ignoreHeaders** | Array | Headers which must not be written down to tape (req and res) | `[ ]` |
 | **hash** | Function | Provide your own IncomingMessage hash function of the signature `function (req, body)` | `see source` |
 
+## Examples
+Some examples and its results can be found in the folder under [./examples](./examples).
+
 ## Tech-Stack
 - [nodemon](https://github.com/remy/nodemon) development mode
 - [jest](https://facebook.github.io/jest/) test environment

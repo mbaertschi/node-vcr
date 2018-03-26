@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+
+## [1.4.2] - 2018-03-26
+### Added
+- Examples
+
+### Changed
+- Fix data stream handling and invalid error handling
+
+### Removed
+
+
 ## [1.4.1] - 2018-03-22
 ### Added
 - Dependencies updates
@@ -15,5 +26,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 
-[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v1.4.1...HEAD
+[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v1.4.2...HEAD
+[1.4.2]: https://github.com/mbaertschi/node-vcr/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/mbaertschi/node-vcr/compare/v1.2.0...v1.4.1
