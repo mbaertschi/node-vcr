@@ -3856,9 +3856,9 @@ normalize-path@^2.0.0, normalize-path@^2.0.1, normalize-path@^2.1.1:
   dependencies:
     remove-trailing-separator "^1.0.1"
 
-npm-check@^5.5.2:
-  version "5.5.2"
-  resolved "https://registry.yarnpkg.com/npm-check/-/npm-check-5.5.2.tgz#6a2cd4bcd5d9f6ebcc0be2ed0a5782feb9106600"
+npm-check@^5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/npm-check/-/npm-check-5.6.0.tgz#eb144ec5b0552949692943ce7c7ff367c5444e54"
   dependencies:
     babel-runtime "^6.6.1"
     callsite-record "^3.0.0"

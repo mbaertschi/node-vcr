@@ -70,12 +70,16 @@ module.exports = (host, usrOpts) => {
         return tape(req, res)
       })
       .catch((err) => {
-        /* eslint-disable no-console */
-        console.log('An HTTP request has been made that node-vcr does not know how to handle')
-        console.log(curl.request(req))
-        /* eslint-enable no-console */
-        res.statusCode = err.status
-        res.end(err.message)
+        if (err.message && err.message === 'Recording Disabled') {
+          /* eslint-disable no-console */
+          console.log('An HTTP request has been made that node-vcr does not know how to handle')
+          console.log(curl.request(req))
+          /* eslint-enable no-console */
+          res.statusCode = err.status
+          res.end(err.message)
+        } else {
+          console.error(err)
+        }
       })
   }
 }

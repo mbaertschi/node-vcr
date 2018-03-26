@@ -10,7 +10,7 @@ const render = (req, res, body, encoding, ignoredHeaders, reqBody) => {
     .filter((key) => ignoredHeaders.indexOf(key) === -1)
     .forEach((key) => {
       template +=
-`// ${key}: ${req._headers[key]}
+`// ${key}: ${req._headers[key].replace(/'/g, '\\\'')}
 `
     })
 
@@ -37,7 +37,7 @@ module.exports = function (req, res) {
     .forEach((key) => {
       template +=
 `
-  res.setHeader('${key}', '${res.headers[key]}')`
+  res.setHeader('${key}', '${res.headers[key].replace(/'/g, '\\\'')}')`
     })
 
   template +=

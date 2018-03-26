@@ -31,11 +31,15 @@ const record = (req, res, filename, ignoredHeaders, reqBody) => {
       body = body.map((data) => {
         let stringData = data.toString(encoding)
 
-        if (pd[contentType]) {
-          stringData = pd[contentType](stringData)
-          if (reqBody) {
-            reqBody = pd[contentType](reqBody)
+        try {
+          if (pd[contentType]) {
+            stringData = pd[contentType](stringData)
+            if (reqBody) {
+              reqBody = pd[contentType](reqBody)
+            }
           }
+        } catch (error) {
+          return stringData
         }
         return stringData
       })
