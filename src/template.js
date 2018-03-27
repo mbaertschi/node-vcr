@@ -1,3 +1,15 @@
+const sanitizeHeader = (header) => {
+  if (Array.isArray(header)) {
+    header = header.map((value) => {
+      return value.replace(/'/g, '\\\'')
+    })
+  } else if (typeof header === 'string') {
+    header = header.replace(/'/g, '\\\'')
+  }
+
+  return header
+}
+
 const render = (req, res, body, encoding, ignoredHeaders, reqBody) => {
   let template =
 `const path = require('path')
@@ -10,7 +22,7 @@ const render = (req, res, body, encoding, ignoredHeaders, reqBody) => {
     .filter((key) => ignoredHeaders.indexOf(key) === -1)
     .forEach((key) => {
       template +=
-`// ${key}: ${req._headers[key].replace(/'/g, '\\\'')}
+`// ${key}: ${sanitizeHeader(req._headers[key])}
 `
     })
 
@@ -37,7 +49,7 @@ module.exports = function (req, res) {
     .forEach((key) => {
       template +=
 `
-  res.setHeader('${key}', '${res.headers[key].replace(/'/g, '\\\'')}')`
+  res.setHeader('${key}', '${sanitizeHeader(res.headers[key])}')`
     })
 
   template +=
