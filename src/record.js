@@ -28,23 +28,20 @@ const record = (req, res, filename, ignoredHeaders, reqBody) => {
         contentType = parts[parts.length - 1]
       }
 
-      body = body.map((data) => {
-        let stringData = data.toString(encoding)
-
-        try {
-          if (pd[contentType]) {
-            stringData = pd[contentType](stringData)
-            if (reqBody) {
-              reqBody = pd[contentType](reqBody)
-            }
+      body = Buffer.concat(body).toString(encoding)
+      let data = body
+      try {
+        if (pd[contentType]) {
+          data = pd[contentType](body)
+          if (reqBody) {
+            reqBody = pd[contentType](reqBody)
           }
-        } catch (error) {
-          return stringData
         }
-        return stringData
-      })
+      } catch (error) {
+        data = body
+      }
 
-      return render(req, res, body, encoding, ignoredHeaders, reqBody)
+      return render(req, res, data, encoding, ignoredHeaders, reqBody)
     })
     .then((data) => {
       return fse.writeFile(filename, data)

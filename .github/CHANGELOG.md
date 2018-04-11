@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 
+## [1.4.3] - 2018-04-11
+### Added
+### Changed
+- Fixed pd bug for buffered response
+### Removed
+
 ## [1.4.3] - 2018-03-27
 ### Added
 
@@ -34,7 +40,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 
-[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v1.4.3...HEAD
+[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v1.4.4...HEAD
+[1.4.4]: https://github.com/mbaertschi/node-vcr/compare/v1.4.3...v1.4.4
 [1.4.3]: https://github.com/mbaertschi/node-vcr/compare/v1.4.2...v1.4.3
 [1.4.2]: https://github.com/mbaertschi/node-vcr/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/mbaertschi/node-vcr/compare/v1.2.0...v1.4.1

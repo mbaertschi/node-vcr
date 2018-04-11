@@ -1508,23 +1508,23 @@ eslint-import-resolver-node@^0.3.1:
     debug "^2.6.9"
     resolve "^1.5.0"
 
-eslint-module-utils@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-module-utils/-/eslint-module-utils-2.1.1.tgz#abaec824177613b8a95b299639e1b6facf473449"
+eslint-module-utils@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-module-utils/-/eslint-module-utils-2.2.0.tgz#b270362cd88b1a48ad308976ce7fa54e98411746"
   dependencies:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-import@^2.9.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.9.0.tgz#26002efbfca5989b7288ac047508bd24f217b169"
+eslint-plugin-import@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.10.0.tgz#fa09083d5a75288df9c6c7d09fe12255985655e7"
   dependencies:
     builtin-modules "^1.1.1"
     contains-path "^0.1.0"
     debug "^2.6.8"
     doctrine "1.5.0"
     eslint-import-resolver-node "^0.3.1"
-    eslint-module-utils "^2.1.1"
+    eslint-module-utils "^2.2.0"
     has "^1.0.1"
     lodash "^4.17.4"
     minimatch "^3.0.3"
@@ -3060,67 +3060,67 @@ jest-mock@^23.0.0-alpha.0:
   version "23.0.0-alpha.0"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-23.0.0-alpha.0.tgz#d2a1fd81d8356b24fe602650e61acc49e008f9df"
 
-jest-plugin-action@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/jest-plugin-action/-/jest-plugin-action-2.7.0.tgz#f69664f77668db98494f069d1f4e4a6bc32fbc70"
+jest-plugin-action@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/jest-plugin-action/-/jest-plugin-action-2.9.0.tgz#027f3b91c39e0a492927b65dea90207db2c6b1be"
   dependencies:
-    jest-plugin-set "^2.7.0"
+    jest-plugin-set "^2.9.0"
 
-jest-plugin-clock@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/jest-plugin-clock/-/jest-plugin-clock-2.7.0.tgz#9c0421ecfa414988b0665b3e26b88ba561d6368d"
+jest-plugin-clock@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/jest-plugin-clock/-/jest-plugin-clock-2.9.0.tgz#67553278bba6fb0d6b240cb250168bf59f42ff52"
   dependencies:
     mockdate "^2.0.2"
 
-jest-plugin-console-matchers@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/jest-plugin-console-matchers/-/jest-plugin-console-matchers-2.7.0.tgz#d99e49a27c4444a4cae4493a95e39204b31ce047"
+jest-plugin-console-matchers@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/jest-plugin-console-matchers/-/jest-plugin-console-matchers-2.9.0.tgz#f496bae016b415e3efcecd6469fd38dc83bb7a39"
 
-jest-plugin-context@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/jest-plugin-context/-/jest-plugin-context-2.7.0.tgz#f654d9f916448b680b92b1273b4b756dee38d101"
+jest-plugin-context@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/jest-plugin-context/-/jest-plugin-context-2.9.0.tgz#602aacbe61213a3bb229067db0eee9e003eb1931"
 
-jest-plugin-for-each@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/jest-plugin-for-each/-/jest-plugin-for-each-2.7.0.tgz#85aaf5e6f750616002b814fd789a1cc47a64da3f"
+jest-plugin-for-each@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/jest-plugin-for-each/-/jest-plugin-for-each-2.9.0.tgz#6daf5fbdf2a0bb35ae18f7534e39ab7ad90033ba"
   dependencies:
     invariant "^2.2.2"
-    jest-plugin-set "^2.7.0"
+    jest-plugin-set "^2.9.0"
 
-jest-plugin-its@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/jest-plugin-its/-/jest-plugin-its-2.7.0.tgz#1b8ae5f6ae1ce5726964a6ca84b1be855cd2f549"
+jest-plugin-its@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/jest-plugin-its/-/jest-plugin-its-2.9.0.tgz#c450891784710ec7314ba7ad18a68a061d40a2f8"
   dependencies:
     invariant "^2.2.2"
-    jest-plugin-set "^2.7.0"
+    jest-plugin-set "^2.9.0"
 
-jest-plugin-set@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/jest-plugin-set/-/jest-plugin-set-2.7.0.tgz#3b8e6ca2eb167d5a7b7d689868bc49d0e32e3d19"
+jest-plugin-set@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/jest-plugin-set/-/jest-plugin-set-2.9.0.tgz#95d4cb0e25e117b8a0b19846598887bf4bb95fca"
 
-jest-plugins-recommended@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/jest-plugins-recommended/-/jest-plugins-recommended-2.7.0.tgz#8365bbf2d731c719cff77faa588abc2370239e6d"
+jest-plugins-recommended@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/jest-plugins-recommended/-/jest-plugins-recommended-2.9.0.tgz#5005491c871da8149362d027f34839a64498481c"
   dependencies:
-    jest-plugin-action "^2.7.0"
-    jest-plugin-clock "^2.7.0"
-    jest-plugin-console-matchers "^2.7.0"
-    jest-plugin-for-each "^2.7.0"
-    jest-plugins "^2.7.0"
-    jest-plugins-rspec "^2.7.0"
+    jest-plugin-action "^2.9.0"
+    jest-plugin-clock "^2.9.0"
+    jest-plugin-console-matchers "^2.9.0"
+    jest-plugin-for-each "^2.9.0"
+    jest-plugins "^2.9.0"
+    jest-plugins-rspec "^2.9.0"
 
-jest-plugins-rspec@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/jest-plugins-rspec/-/jest-plugins-rspec-2.7.0.tgz#6d57e4de953ded274f900665dba2b31ca2061e04"
+jest-plugins-rspec@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/jest-plugins-rspec/-/jest-plugins-rspec-2.9.0.tgz#15cc8cd97020b19a87cec2c5ee3cc594e9f63976"
   dependencies:
-    jest-plugin-context "^2.7.0"
-    jest-plugin-its "^2.7.0"
-    jest-plugin-set "^2.7.0"
-    jest-plugins "^2.7.0"
+    jest-plugin-context "^2.9.0"
+    jest-plugin-its "^2.9.0"
+    jest-plugin-set "^2.9.0"
+    jest-plugins "^2.9.0"
 
-jest-plugins@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/jest-plugins/-/jest-plugins-2.7.0.tgz#83563580a98850b858984d8a635e1845eea7a09a"
+jest-plugins@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/jest-plugins/-/jest-plugins-2.9.0.tgz#9323583ad9d5eaa321723d7601c16192bfcda7db"
 
 jest-regex-util@^22.1.0:
   version "22.1.0"
@@ -3813,9 +3813,9 @@ node-pre-gyp@^0.6.39:
     tar "^2.2.1"
     tar-pack "^3.4.0"
 
-nodemon@^1.17.2:
-  version "1.17.2"
-  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.17.2.tgz#17c0062629610e03dd01241c576f1c4068da9fdd"
+nodemon@^1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.17.3.tgz#3b0bbc2ee05ccb43b1aef15ba05c63c7bc9b8530"
   dependencies:
     chokidar "^2.0.2"
     debug "^3.1.0"

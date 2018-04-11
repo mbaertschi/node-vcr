@@ -58,11 +58,9 @@ module.exports = function (req, res) {
   res.setHeader('x-node-vcr-tape', path.basename(__filename, '.js'))
 `
 
-  body.forEach((data) => {
-    template +=
+  template +=
 `
-  res.write(Buffer.from(\`${data}\`, '${encoding}'))`
-  })
+  res.write(Buffer.from(\`${body}\`, '${encoding}'))`
 
   template +=
 `
