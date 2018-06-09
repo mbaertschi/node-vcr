@@ -1,7 +1,8 @@
 const pd = require('pretty-data').pd
 const fse = require('fs-extra')
+const zlib = require('zlib')
 const buffer = require('./buffer')
-const { getContentType, isHumanReadable } = require('./media-type')
+const { getContentType, isHumanReadable, isCompressed } = require('./media-type')
 const { render } = require('./template')
 
 /**
@@ -18,7 +19,15 @@ const { render } = require('./template')
  * @returns { Promise.<String> }
  */
 const record = (req, res, filename, ignoredHeaders, reqBody) => {
-  return buffer(res)
+  let stream = res
+  const finalIgnoredHeaders = [...ignoredHeaders]
+  if (isCompressed(res) && isHumanReadable(res)) {
+    stream = res.pipe(zlib.createUnzip())
+    finalIgnoredHeaders.push('content-encoding')
+    finalIgnoredHeaders.push('content-length')
+  }
+
+  return buffer(stream)
     .then((body) => {
       const encoding = isHumanReadable(res) ? 'utf-8' : 'base64'
       let contentType = getContentType(res)
@@ -41,7 +50,7 @@ const record = (req, res, filename, ignoredHeaders, reqBody) => {
         data = body
       }
 
-      return render(req, res, data, encoding, ignoredHeaders, reqBody)
+      return render(req, res, data, encoding, finalIgnoredHeaders, reqBody)
     })
     .then((data) => {
       return fse.writeFile(filename, data)
