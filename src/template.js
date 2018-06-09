@@ -10,6 +10,10 @@ const sanitizeHeader = (header) => {
   return header
 }
 
+const sanitizeBody = (body) => {
+  return body.replace(/\\/g, '\\$&')
+}
+
 const render = (req, res, body, encoding, ignoredHeaders, reqBody) => {
   let template =
 `const path = require('path')
@@ -60,7 +64,7 @@ module.exports = function (req, res) {
 
   template +=
 `
-  res.write(Buffer.from(\`${body}\`, '${encoding}'))`
+  res.write(Buffer.from(\`${sanitizeBody(body)}\`, '${encoding}'))`
 
   template +=
 `
