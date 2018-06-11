@@ -148,7 +148,7 @@ describe('record', () => {
             })
         })
       })
-
+      
       it('records the response to disk using utf-8, pretty-prints the json data, and sanitize data', (done) => {
         const requestHandler = (req, res) => {
           res.statusCode = 201
@@ -159,6 +159,31 @@ describe('record', () => {
 
         makeRequest(requestHandler, (res) => {
           const expected = fixture('sanitizeBody').replace('{addr}', server.addr).replace('{port}', server.port)
+
+          return record(res.req, res, tmpdir.join('foo.js'), [])
+            .then((filename) => {
+              const content = fse.readFileSync(filename, 'utf8')
+
+              expect(content).toEqual(expected)
+              return done()
+            })
+            .catch((error) => {
+              return done(error)
+            })
+        })
+      })
+
+      it('records the compress human readable response to disk using utf-8 and pretty-prints the json data', (done) => {
+        const requestHandler = (req, res) => {
+          res.statusCode = 201
+          res.setHeader('content-type', 'application/json')
+          res.setHeader('date', 'Sat, 26 Oct 1985 08:20:00 GMT')
+          res.setHeader('content-encoding', 'gzip')
+          res.end(Buffer.from('H4sIAAAAAAAAE6tWKkktLlGyUsoqzs9TqgUAAu6QLg8AAAA=', 'base64'))
+        }
+
+        makeRequest(requestHandler, (res) => {
+          const expected = fixture('jsonDecompressed').replace('{addr}', server.addr).replace('{port}', server.port)
 
           return record(res.req, res, tmpdir.join('foo.js'), [])
             .then((filename) => {

@@ -38,12 +38,21 @@ const getContentType = (res) => {
  * @returns { Boolean }
 */
 const isHumanReadable = (res) => {
+  const contentType = getContentType(res)
+  return humanReadableContentTypes.indexOf(contentType) >= 0
+}
+
+/**
+ * Returns whether a request's body is compressed.
+ *
+ * @memberof module:node-vcr/media-type
+ * @param { http.IncomingMessage } res
+ * @returns { Boolean }
+*/
+const isCompressed = (res) => {
   const headers = res.headers
   const encoding = getHeader(headers, 'content-encoding')
-  const notCompressed = !encoding || encoding === 'identity'
-  const contentType = getContentType(res)
-
-  return notCompressed && humanReadableContentTypes.indexOf(contentType) >= 0
+  return encoding && encoding !== 'identity'
 }
 
 /**
@@ -51,5 +60,6 @@ const isHumanReadable = (res) => {
  */
 module.exports = {
   getContentType,
-  isHumanReadable
+  isHumanReadable,
+  isCompressed
 }

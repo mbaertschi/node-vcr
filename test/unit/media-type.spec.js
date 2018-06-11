@@ -39,7 +39,7 @@ describe('media-type', () => {
       expect(mediaType.isHumanReadable(res)).toBeTruthy()
     })
 
-    it('returns false when the content-type is human readable and the content-encoding is gzip', () => {
+    it('returns true when the content-type is human readable and the content-encoding is gzip', () => {
       const res = {
         headers: {
           'content-encoding': ['gzip'],
@@ -47,7 +47,7 @@ describe('media-type', () => {
         }
       }
 
-      expect(mediaType.isHumanReadable(res)).toBeFalsy()
+      expect(mediaType.isHumanReadable(res)).toBeTruthy()
     })
   })
 })
