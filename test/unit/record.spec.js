@@ -148,7 +148,7 @@ describe('record', () => {
             })
         })
       })
-      
+
       it('records the response to disk using utf-8, pretty-prints the json data, and sanitize data', (done) => {
         const requestHandler = (req, res) => {
           res.statusCode = 201

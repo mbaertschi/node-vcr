@@ -7,7 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 
-## [1.4.3] - 2018-04-11
+## [1.4.5] - 2018-06-11
+### Added
+### Changed
+- Fixed: Sanitize backslash in content body
+- Fixed: Decompress human readable data
+- Updated dependencies
+### Removed
+
+## [1.4.4] - 2018-04-11
 ### Added
 ### Changed
 - Fixed pd bug for buffered response
@@ -40,7 +48,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 
-[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v1.4.4...HEAD
+[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v1.4.5...HEAD
+[1.4.5]: https://github.com/mbaertschi/node-vcr/compare/v1.4.4...v1.4.5
 [1.4.4]: https://github.com/mbaertschi/node-vcr/compare/v1.4.3...v1.4.4
 [1.4.3]: https://github.com/mbaertschi/node-vcr/compare/v1.4.2...v1.4.3
 [1.4.2]: https://github.com/mbaertschi/node-vcr/compare/v1.4.1...v1.4.2
