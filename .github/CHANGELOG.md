@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.0] - 2018-06-15
+### Added
+- json-bigint for json response body parsing in case that there are big integers which JSON cannot handle itself
+- Added the possebility to pass the `maxredirects=0` header to custom requests in order to suppress redirects only for certain requests
+### Changed
+- Fixed: Array headers in template are now correct formatted
+### Removed
 
 ## [1.4.5] - 2018-06-11
 ### Added
@@ -48,7 +55,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 
-[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v1.4.5...HEAD
+[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/mbaertschi/node-vcr/compare/v1.4.5...v2.0.0
 [1.4.5]: https://github.com/mbaertschi/node-vcr/compare/v1.4.4...v1.4.5
 [1.4.4]: https://github.com/mbaertschi/node-vcr/compare/v1.4.3...v1.4.4
 [1.4.3]: https://github.com/mbaertschi/node-vcr/compare/v1.4.2...v1.4.3
