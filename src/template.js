@@ -1,8 +1,12 @@
+const _ = require('lodash')
+
 const sanitizeHeader = (header) => {
   if (Array.isArray(header)) {
     header = header.map((value) => {
       return value.replace(/'/g, '\\\'')
     })
+  } else if (typeof header === 'object') {
+    header = _.mapValues(header, sanitizeHeader)
   } else if (typeof header === 'string') {
     header = header.replace(/'/g, '\\\'')
   }
@@ -51,9 +55,15 @@ module.exports = function (req, res) {
   Object.keys(res.headers)
     .filter((key) => ignoredHeaders.indexOf(key) === -1)
     .forEach((key) => {
-      template +=
+      if (Array.isArray(res.headers[key])) {
+        template +=
+`
+  res.setHeader('${key}', ['${sanitizeHeader(res.headers[key]).join('\', \'')}'])`
+      } else {
+        template +=
 `
   res.setHeader('${key}', '${sanitizeHeader(res.headers[key])}')`
+      }
     })
 
   template +=

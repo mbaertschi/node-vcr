@@ -1,6 +1,6 @@
 {
   "name": "node-vcr",
-  "version": "1.4.5",
+  "version": "2.0.0",
   "description": "Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests",
   "main": "./lib/index.js",
   "scripts": {
@@ -64,6 +64,7 @@
     "follow-redirects": "^1.5.0",
     "fs-extra": "^6.0.1",
     "incoming-message-hash": "^3.2.2",
+    "json-bigint": "^0.3.0",
     "pretty-data": "^0.40.0"
   },
   "jest": {
@@ -74,6 +75,7 @@
     "collectCoverage": true,
     "coverageDirectory": "reports/coverage",
     "reporters": [
+      "default",
       "jest-junit"
     ],
     "setupTestFrameworkScriptFile": "<rootDir>/test/global.config.js"

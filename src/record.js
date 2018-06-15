@@ -1,6 +1,7 @@
 const pd = require('pretty-data').pd
 const fse = require('fs-extra')
 const zlib = require('zlib')
+const JSONBigInt = require('json-bigint')
 const buffer = require('./buffer')
 const { getContentType, isHumanReadable, isCompressed } = require('./media-type')
 const { render } = require('./template')
@@ -40,10 +41,14 @@ const record = (req, res, filename, ignoredHeaders, reqBody) => {
       body = Buffer.concat(body).toString(encoding)
       let data = body
       try {
-        if (pd[contentType]) {
-          data = pd[contentType](body)
-          if (reqBody) {
-            reqBody = pd[contentType](reqBody)
+        if (contentType === 'json') {
+          data = JSON.stringify(JSONBigInt.parse(data), null, 2)
+        } else {
+          if (pd[contentType]) {
+            data = pd[contentType](body)
+            if (reqBody) {
+              reqBody = pd[contentType](reqBody)
+            }
           }
         }
       } catch (error) {

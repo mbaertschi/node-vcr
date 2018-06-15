@@ -25,7 +25,15 @@ const proxy = (req, body, host, maxRedirects, callback) => {
 
   const uri = url.parse(host)
   const protocol = uri.protocol.replace(':', '')
-  const mod = maxRedirects ? (followRedirects[protocol] || followRedirects.http) : (modMapping[protocol] || http)
+
+  // if maxRedirects is enabled in settings the client still can disable
+  // redirect for custom request by setting the maxredirects header to 0
+  let redirect = maxRedirects > 0
+  if (req.headers.maxredirects === '0') {
+    redirect = false
+  }
+
+  const mod = redirect ? followRedirects[protocol] || followRedirects.http : modMapping[protocol] || http
   const pReq = mod.request({
     hostname: uri.hostname,
     port: uri.port,
