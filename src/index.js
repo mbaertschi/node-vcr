@@ -32,6 +32,7 @@ RecordingDisabledError.status = 404
  * @param { boolean } [options.tapeRequestBody=false]   If true, the request body will be stored to tape
  * @param { array } [options.ignoreHeaders=[]]          A list of headers which must not be written down to tape
  * @param { function } [options.hash=messageHash.sync]  Provide your own IncomingMessage hash function of the signature `function (req, body)`
+ * @param { boolean } [options.reload=false]            If true, node-vcr will reload required tape
  * @returns { function } A function of the signature `function (req, res)` that you can give to an `http.Server` as its handler
  */
 module.exports = (host, usrOpts) => {
@@ -64,6 +65,9 @@ module.exports = (host, usrOpts) => {
         }
       })
       .then((file) => {
+        if (opts.reload) {
+          delete require.cache[require.resolve(file)]
+        }
         return require(file)
       })
       .then((tape) => {
