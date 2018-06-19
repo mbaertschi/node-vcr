@@ -147,4 +147,37 @@ describe('node-vcr', () => {
         })
     })
   })
+
+  describe('reload', () => {
+    beforeEach(() => { vcr = nodeVcr(server.host, { dirname: tmpdir.dirname, reload: true }) })
+    beforeEach((done) => {
+      const file = 'd08a19312169fd67cd67a764c178771e.js'
+      const tape = [
+        "const path = require('path')",
+        'module.exports = function (req, res) {',
+        '  res.statusCode = 201',
+        "  res.setHeader('content-type', 'text/html')",
+        "  res.setHeader('x-node-vcr-tape', path.basename(__filename, '.js'))",
+        "  res.end('YAY')",
+        '}',
+        ''
+      ].join('\n')
+
+      fse.writeFile(tmpdir.join(file), tape, done)
+    })
+
+    it('does make a request to the server', (done) => {
+      request(vcr)
+        .get('/playback/1')
+        .set('host', 'localhost:3001')
+        .expect('x-node-vcr-tape', 'd08a19312169fd67cd67a764c178771e')
+        .expect('content-type', 'text/html')
+        .expect(201, 'OK')
+        .end((error) => {
+          expect(error).toBeNull()
+          expect(server.requests).toHaveLength(1)
+          done()
+        })
+    })
+  })
 })

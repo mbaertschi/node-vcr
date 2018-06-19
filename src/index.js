@@ -32,7 +32,8 @@ RecordingDisabledError.status = 404
  * @param { boolean } [options.tapeRequestBody=false]   If true, the request body will be stored to tape
  * @param { array } [options.ignoreHeaders=[]]          A list of headers which must not be written down to tape
  * @param { function } [options.hash=messageHash.sync]  Provide your own IncomingMessage hash function of the signature `function (req, body)`
- * @param { boolean } [options.refresh=false]           If true, node-vcr will refresh required tape
+ * @param { boolean } [options.reload=false]            If true, node-vcr will reload (delete and record again) required tape
+ * @param { boolean } [options.refresh=false]           If true, node-vcr will refresh (reload only in require.cache) required tape
  * @returns { function } A function of the signature `function (req, res)` that you can give to an `http.Server` as its handler
  */
 module.exports = (host, usrOpts) => {
@@ -43,13 +44,18 @@ module.exports = (host, usrOpts) => {
 
   return (req, res) => {
     return fse.ensureDir(opts.dirname)
-      .then(() => {
-        return buffer(req)
-      })
+      .then(() => buffer(req))
       .then((body) => {
         const filename = path.join(opts.dirname, `${opts.hash(req, Buffer.concat(body))}.js`)
 
-        if (fse.existsSync(filename)) {
+        let exists = fse.existsSync(filename)
+        if (opts.reload && exists) {
+          exists = false
+          delete require.cache[require.resolve(filename)]
+          fse.removeSync(filename)
+        }
+
+        if (exists) {
           return filename
         } else if (opts.noRecord) {
           throw RecordingDisabledError
@@ -70,9 +76,7 @@ module.exports = (host, usrOpts) => {
         }
         return require(file)
       })
-      .then((tape) => {
-        return tape(req, res)
-      })
+      .then((tape) => tape(req, res))
       .catch((err) => {
         if (err.message && err.message === 'Recording Disabled') {
           /* eslint-disable no-console */

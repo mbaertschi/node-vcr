@@ -6,9 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.2] - 2018-06-19
+### Added
+- option.reload which reloads (delete and record again) the tape if set to true
+### Changed
+### Removed
+
 ## [2.0.1] - 2018-06-19
 ### Added
-- option.refresh which reloads the tape if set to true
+- option.refresh which refreshs (remove from requrie.cache) the tape if set to true
 ### Changed
 ### Removed
 

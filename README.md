@@ -69,6 +69,7 @@ server.listen(port)
 | **tapeRequestBody** | Boolean | If enabled the request body will be written to tape | `false` |
 | **ignoreHeaders** | Array | Headers which must not be written down to tape (req and res) | `[ ]` |
 | **hash** | Function | Provide your own IncomingMessage hash function of the signature `function (req, body)` | `see source` |
+| **reload** | Boolean | If true, node-vcr will reload (delete and record) required tape| `false` |
 | **refresh** | Boolean | If true, node-vcr will refresh required tape| `false` |
 
 ## Examples
