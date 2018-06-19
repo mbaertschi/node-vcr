@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.1] - 2018-06-19
+### Added
+- option.refresh which reloads the tape if set to true
+### Changed
+### Removed
+
 ## [2.0.0] - 2018-06-15
 ### Added
 - json-bigint for json response body parsing in case that there are big integers which JSON cannot handle itself
@@ -55,7 +61,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 
-[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/mbaertschi/node-vcr/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/mbaertschi/node-vcr/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/mbaertschi/node-vcr/compare/v1.4.5...v2.0.0
 [1.4.5]: https://github.com/mbaertschi/node-vcr/compare/v1.4.4...v1.4.5
 [1.4.4]: https://github.com/mbaertschi/node-vcr/compare/v1.4.3...v1.4.4
