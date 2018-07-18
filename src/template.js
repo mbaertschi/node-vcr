@@ -15,7 +15,7 @@ const sanitizeHeader = (header) => {
 }
 
 const sanitizeBody = (body) => {
-  return body.replace(/\\/g, '\\$&')
+  return body.replace(/(\\|\$\{)/g, '\\$&')
 }
 
 const render = (req, res, body, encoding, ignoredHeaders, reqBody) => {
