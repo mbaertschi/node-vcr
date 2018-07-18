@@ -58,7 +58,7 @@ const record = (req, res, filename, ignoredHeaders, reqBody) => {
       return render(req, res, data, encoding, finalIgnoredHeaders, reqBody)
     })
     .then((data) => {
-      return fse.writeFile(filename, data)
+      return fse.outputFile(filename, data)
     })
     .then(() => {
       return filename

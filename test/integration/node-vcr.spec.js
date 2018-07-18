@@ -78,6 +78,40 @@ describe('node-vcr', () => {
             })
         })
       })
+
+      describe('when given a custom hashing function with slash', () => {
+        beforeEach(() => {
+          // customHash creates an MD5 of the request, ingoring its querystring, headers, etc.
+          const customHash = (req, body) => {
+            const hash = crypto.createHash('md5')
+            const parts = url.parse(req.url, true)
+
+            hash.update(req.method)
+            hash.update(parts.pathname)
+            hash.write(body)
+
+            return `${parts.pathname}/${hash.digest('hex')}`
+          }
+
+          vcr = nodeVcr(server.host, { dirname: tmpdir.dirname, hash: customHash })
+        })
+
+        it('uses the custom hash to create the tape name', (done) => {
+          request(vcr)
+            .get('/record/1')
+            .query({ foo: 'bar' })
+            .query({ date: new Date() }) // without the custom hash, this would always cause 404s
+            .set('host', 'localhost:3001')
+            .expect('x-node-vcr-tape', '3f142e515cb24d1af9e51e6869bf666f')
+            .expect('content-type', 'text/html')
+            .expect(201, 'OK')
+            .end((error) => {
+              expect(error).toBeNull()
+              expect(fse.existsSync(tmpdir.join('/record/1/3f142e515cb24d1af9e51e6869bf666f.js'))).toBeTruthy()
+              done()
+            })
+        })
+      })
     })
 
     describe('when recording is not enabled', () => {
