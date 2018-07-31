@@ -154,7 +154,7 @@ describe('record', () => {
           res.statusCode = 201
           res.setHeader('content-type', 'application/json')
           res.setHeader('date', 'Sat, 26 Oct 1985 08:20:00 GMT')
-          res.end(Buffer.from('{ "test": "c:\\temp\\foo.js" }'))
+          res.end(Buffer.from('{ "test": "c:\\temp\\foo.js", "templateDollar": "${dollar}", "dollar": "${" }')) // eslint-disable-line
         }
 
         makeRequest(requestHandler, (res) => {

@@ -12,12 +12,14 @@ module.exports = function (req, res) {
   res.setHeader('content-type', 'application/json')
   res.setHeader('date', 'Sat, 26 Oct 1985 08:20:00 GMT')
   res.setHeader('connection', 'close')
-  res.setHeader('content-length', '28')
+  res.setHeader('content-length', '75')
 
   res.setHeader('x-node-vcr-tape', path.basename(__filename, '.js'))
 
   res.write(Buffer.from(`{
-  "test": "c:\\temp\\foo.js"
+  "test": "c:\\temp\\foo.js",
+  "templateDollar": "\${dollar}",
+  "dollar": "\${"
 }`, 'utf-8'))
   res.end()
 
