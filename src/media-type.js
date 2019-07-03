@@ -36,7 +36,7 @@ const getContentType = (res) => {
  * @memberof module:node-vcr/media-type
  * @param { http.IncomingMessage } req
  * @returns { Boolean }
-*/
+ */
 const isHumanReadable = (res) => {
   const contentType = getContentType(res)
   return humanReadableContentTypes.indexOf(contentType) >= 0
@@ -48,7 +48,7 @@ const isHumanReadable = (res) => {
  * @memberof module:node-vcr/media-type
  * @param { http.IncomingMessage } res
  * @returns { Boolean }
-*/
+ */
 const isCompressed = (res) => {
   const headers = res.headers
   const encoding = getHeader(headers, 'content-encoding')

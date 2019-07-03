@@ -6,8 +6,8 @@ const { promisify } = require('util')
 const url = require('url')
 
 const modMapping = {
-  'http': http,
-  'https': https
+  http: http,
+  https: https
 }
 
 /**
@@ -23,7 +23,7 @@ const modMapping = {
 const proxy = (req, body, host, maxRedirects, callback) => {
   followRedirects.maxRedirects = maxRedirects
 
-  const uri = url.parse(host)
+  const uri = new url.URL(host)
   const protocol = uri.protocol.replace(':', '')
 
   // if maxRedirects is enabled in settings the client still can disable
@@ -33,18 +33,23 @@ const proxy = (req, body, host, maxRedirects, callback) => {
     redirect = false
   }
 
-  const mod = redirect ? followRedirects[protocol] || followRedirects.http : modMapping[protocol] || http
-  const pReq = mod.request({
-    hostname: uri.hostname,
-    port: uri.port,
-    method: req.method,
-    path: req.url,
-    headers: req.headers,
-    servername: uri.hostname,
-    rejectUnauthorized: false
-  }, (pRes) => {
-    return callback(null, pRes)
-  })
+  const mod = redirect
+    ? followRedirects[protocol] || followRedirects.http
+    : modMapping[protocol] || http
+  const pReq = mod.request(
+    {
+      hostname: uri.hostname,
+      port: uri.port,
+      method: req.method,
+      path: req.url,
+      headers: req.headers,
+      servername: uri.hostname,
+      rejectUnauthorized: false
+    },
+    (pRes) => {
+      return callback(null, pRes)
+    }
+  )
 
   pReq.setHeader('host', uri.host)
 

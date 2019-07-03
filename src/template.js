@@ -3,12 +3,12 @@ const _ = require('lodash')
 const sanitizeHeader = (header) => {
   if (Array.isArray(header)) {
     header = header.map((value) => {
-      return value.replace(/'/g, '\\\'')
+      return value.replace(/'/g, "\\'")
     })
   } else if (typeof header === 'object') {
     header = _.mapValues(header, sanitizeHeader)
   } else if (typeof header === 'string') {
-    header = header.replace(/'/g, '\\\'')
+    header = header.replace(/'/g, "\\'")
   }
 
   return header
@@ -19,8 +19,7 @@ const sanitizeBody = (body) => {
 }
 
 const render = (req, res, body, encoding, ignoredHeaders, reqBody) => {
-  let template =
-`const path = require('path')
+  let template = `const path = require('path')
 
 // ${req.method} ${decodeURIComponent(req.path)}
 
@@ -29,25 +28,21 @@ const render = (req, res, body, encoding, ignoredHeaders, reqBody) => {
   Object.keys(req._headers)
     .filter((key) => ignoredHeaders.indexOf(key) === -1)
     .forEach((key) => {
-      template +=
-`// ${key}: ${sanitizeHeader(req._headers[key])}
+      template += `// ${key}: ${sanitizeHeader(req._headers[key])}
 `
     })
 
   if (reqBody) {
-    template +=
-`
+    template += `
 // Request Body:
 `
     reqBody.split('\n').forEach((line) => {
-      template +=
-`// ${line}
+      template += `// ${line}
 `
     })
   }
 
-  template +=
-`
+  template += `
 module.exports = function (req, res) {
   res.statusCode = ${JSON.stringify(res.statusCode)}
 `
@@ -56,28 +51,23 @@ module.exports = function (req, res) {
     .filter((key) => ignoredHeaders.indexOf(key) === -1)
     .forEach((key) => {
       if (Array.isArray(res.headers[key])) {
-        template +=
-`
-  res.setHeader('${key}', ['${sanitizeHeader(res.headers[key]).join('\', \'')}'])`
+        template += `
+  res.setHeader('${key}', ['${sanitizeHeader(res.headers[key]).join("', '")}'])`
       } else {
-        template +=
-`
+        template += `
   res.setHeader('${key}', '${sanitizeHeader(res.headers[key])}')`
       }
     })
 
-  template +=
-`
+  template += `
 
   res.setHeader('x-node-vcr-tape', path.basename(__filename, '.js'))
 `
 
-  template +=
-`
+  template += `
   res.write(Buffer.from(\`${sanitizeBody(body)}\`, '${encoding}'))`
 
-  template +=
-`
+  template += `
   res.end()
 
   return __filename

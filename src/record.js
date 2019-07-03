@@ -3,7 +3,11 @@ const fse = require('fs-extra')
 const zlib = require('zlib')
 const JSONBigInt = require('json-bigint')
 const buffer = require('./buffer')
-const { getContentType, isHumanReadable, isCompressed } = require('./media-type')
+const {
+  getContentType,
+  isHumanReadable,
+  isCompressed
+} = require('./media-type')
 const { render } = require('./template')
 
 /**

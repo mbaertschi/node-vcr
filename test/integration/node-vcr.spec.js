@@ -21,7 +21,7 @@ describe('node-vcr', () => {
         request(vcr)
           .get('/record/1')
           .set('host', 'localhost:3001')
-          .expect('x-node-vcr-tape', 'c5a8da9d10069e77a615f9ac58b0ad37')
+          .expect('x-node-vcr-tape', '0aec39cb69f34888e40ffae3b28dd012')
           .expect('content-type', 'text/html')
           .expect(201, 'OK')
           .end((error) => {
@@ -35,12 +35,12 @@ describe('node-vcr', () => {
         request(vcr)
           .get('/record/2')
           .set('host', 'localhost:3001')
-          .expect('x-node-vcr-tape', '5cf1bd6b8d3943e5c3fb3b75b23d0265')
+          .expect('x-node-vcr-tape', '430594ed82343510c5670eba378a87df')
           .expect('content-type', 'text/html')
           .expect(201, 'OK')
           .end((error) => {
             expect(error).toBeNull()
-            expect(fse.existsSync(tmpdir.join('5cf1bd6b8d3943e5c3fb3b75b23d0265.js'))).toBeTruthy()
+            expect(fse.existsSync(tmpdir.join('430594ed82343510c5670eba378a87df.js'))).toBeTruthy()
             done()
           })
       })
@@ -50,7 +50,7 @@ describe('node-vcr', () => {
           // customHash creates an MD5 of the request, ingoring its querystring, headers, etc.
           const customHash = (req, body) => {
             const hash = crypto.createHash('md5')
-            const parts = url.parse(req.url, true)
+            const parts = new url.URL(req.url, 'relative:///')
 
             hash.update(req.method)
             hash.update(parts.pathname)
@@ -84,7 +84,7 @@ describe('node-vcr', () => {
           // customHash creates an MD5 of the request, ingoring its querystring, headers, etc.
           const customHash = (req, body) => {
             const hash = crypto.createHash('md5')
-            const parts = url.parse(req.url, true)
+            const parts = new url.URL(req.url, 'relative:///')
 
             hash.update(req.method)
             hash.update(parts.pathname)
@@ -152,7 +152,7 @@ describe('node-vcr', () => {
   describe('playback', () => {
     beforeEach(() => { vcr = nodeVcr(server.host, { dirname: tmpdir.dirname }) })
     beforeEach((done) => {
-      const file = 'd08a19312169fd67cd67a764c178771e.js'
+      const file = '6b25ffd68922f5faeb9d97dc83ea8eb0.js'
       const tape = [
         "const path = require('path')",
         'module.exports = function (req, res) {',
@@ -171,7 +171,7 @@ describe('node-vcr', () => {
       request(vcr)
         .get('/playback/1')
         .set('host', 'localhost:3001')
-        .expect('x-node-vcr-tape', 'd08a19312169fd67cd67a764c178771e')
+        .expect('x-node-vcr-tape', '6b25ffd68922f5faeb9d97dc83ea8eb0')
         .expect('content-type', 'text/html')
         .expect(201, 'YAY')
         .end((error) => {
@@ -185,7 +185,7 @@ describe('node-vcr', () => {
   describe('reload', () => {
     beforeEach(() => { vcr = nodeVcr(server.host, { dirname: tmpdir.dirname, reload: true }) })
     beforeEach((done) => {
-      const file = 'd08a19312169fd67cd67a764c178771e.js'
+      const file = '6b25ffd68922f5faeb9d97dc83ea8eb0.js'
       const tape = [
         "const path = require('path')",
         'module.exports = function (req, res) {',
@@ -204,7 +204,7 @@ describe('node-vcr', () => {
       request(vcr)
         .get('/playback/1')
         .set('host', 'localhost:3001')
-        .expect('x-node-vcr-tape', 'd08a19312169fd67cd67a764c178771e')
+        .expect('x-node-vcr-tape', '6b25ffd68922f5faeb9d97dc83ea8eb0')
         .expect('content-type', 'text/html')
         .expect(201, 'OK')
         .end((error) => {

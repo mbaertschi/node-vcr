@@ -43,10 +43,14 @@ module.exports = (host, usrOpts) => {
   debug('opts', opts)
 
   return (req, res) => {
-    return fse.ensureDir(opts.dirname)
+    return fse
+      .ensureDir(opts.dirname)
       .then(() => buffer(req))
       .then((body) => {
-        const filename = path.join(opts.dirname, `${opts.hash(req, Buffer.concat(body))}.js`)
+        const filename = path.join(
+          opts.dirname,
+          `${opts.hash(req, Buffer.concat(body))}.js`
+        )
 
         let exists = fse.existsSync(filename)
         if (opts.reload && exists) {
@@ -60,14 +64,13 @@ module.exports = (host, usrOpts) => {
         } else if (opts.noRecord) {
           throw RecordingDisabledError
         } else {
-          return proxy(req, body, host, opts.maxRedirects)
-            .then((pRes) => {
-              let reqBody
-              if (opts.tapeRequestBody) {
-                reqBody = body.toString()
-              }
-              return record(pRes.req, pRes, filename, opts.ignoreHeaders, reqBody)
-            })
+          return proxy(req, body, host, opts.maxRedirects).then((pRes) => {
+            let reqBody
+            if (opts.tapeRequestBody) {
+              reqBody = body.toString()
+            }
+            return record(pRes.req, pRes, filename, opts.ignoreHeaders, reqBody)
+          })
         }
       })
       .then((file) => {
@@ -80,7 +83,9 @@ module.exports = (host, usrOpts) => {
       .catch((err) => {
         if (err.message && err.message === 'Recording Disabled') {
           /* eslint-disable no-console */
-          console.log('An HTTP request has been made that node-vcr does not know how to handle')
+          console.log(
+            'An HTTP request has been made that node-vcr does not know how to handle'
+          )
           console.log(curl.request(req))
           /* eslint-enable no-console */
           res.statusCode = err.status

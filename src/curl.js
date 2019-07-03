@@ -25,7 +25,9 @@ const request = (req) => {
  * @returns { String }
  */
 const response = (req, res) => {
-  let out = `> HTTP/${req.httpVersion} ${res.statusCode} ${http.STATUS_CODES[res.statusCode]}\n`
+  let out = `> HTTP/${req.httpVersion} ${res.statusCode} ${
+    http.STATUS_CODES[res.statusCode]
+  }\n`
 
   Object.keys(res._headers).forEach((name) => {
     out += `> ${name}: ${res._headers[name]}\n`
