@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/mbaertschi/node-vcr#readme",
   "engines": {
-    "node": ">=8.16.x"
+    "node": ">=8.15.x"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
