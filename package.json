@@ -64,7 +64,7 @@
     "follow-redirects": "^1.7.0",
     "fs-extra": "^8.1.0",
     "incoming-message-hash": "^4.0.0",
-    "json-bigint": "^0.3.0",
+    "json-bigint": "^1.0.0",
     "pretty-data": "^0.40.0"
   },
   "jest": {
